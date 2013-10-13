@@ -1,0 +1,37 @@
+{
+  "uid": "github.com/pinf-io/io.pinf.redis",
+  "name": "io.pinf.redis",
+  "version": "0.1.0",
+  "pm": "sm",
+  "engines": {
+    "node": "~0.10.15"
+  },
+  "mappings": {
+    "pinf-io-daemonize": "github.com/pinf-io/pinf-io-daemonize/~0.1.0",
+  	"redis": [
+      "archive",
+      "http://download.redis.io/releases/redis-2.6.16.tar.gz",
+      {
+        "descriptor": {
+          "pm": "make",
+          "bin": {
+            "cli": "./src/redis-cli",
+            "server": "./src/redis-server"
+          }
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "mocha": "~1.9.0"
+  },
+  "scripts": {
+    "start": "node io start",
+    "stop": "node io stop",
+    "test": "node_modules/.bin/mocha --reporter list test/*.js"
+  },
+  "on": {
+    "pinf/0/runtime/control/0#events/start": "$__DIRNAME/on.js",
+    "pinf/0/runtime/control/0#events/stop": "$__DIRNAME/on.js"
+  }
+}
